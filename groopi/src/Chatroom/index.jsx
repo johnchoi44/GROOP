@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import logo2 from "../images/logo2.png"
-import settings from "../images/vector.png"
+import settings from "../images/Vector.png"
 import fourusers from "./temp_data.jsx"
 import './style.css';
 
