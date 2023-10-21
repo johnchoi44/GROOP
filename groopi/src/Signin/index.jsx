@@ -34,7 +34,7 @@ function Signin() {
                     <h1 style = {{fontSize: '50px',marginBlockStart: '0', marginBlockEnd: '0'}}>Welcome!</h1>
                     <h1 style = {{fontSize: '10px',color: '#959494',marginBlockStart: '0', marginBlockEnd: '0',marginBottom: '50px'}}>Sign in with your account</h1>
                     <div className="inputTitle">
-                        username
+                        email
                     </div>
                     <input style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
                     <div className="inputTitle">

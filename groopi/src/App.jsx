@@ -3,6 +3,7 @@ import Home from "./Home/index";
 import Signin from "./Signin/index";
 import Signup from "./Signup/index";
 import Signup2 from "./Signup2/index";
+import Chatroom from './Chatroom/index';
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
     element: <Signup2/>
   },
 
+  {
+    path: "/chatroom",
+    element: <Chatroom/>
+  }
 ])
 
   return(
