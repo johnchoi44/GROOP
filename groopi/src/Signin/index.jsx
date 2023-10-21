@@ -1,9 +1,10 @@
-import {React, useState, useNavigate} from "react";
+import {React, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
 import './style.css';
 import { auth } from "../firebase/firebase-config";
-import signOut from "firebase/auth"
+
 
 function Signin() {
     const [username, setUsername] = useState("");
