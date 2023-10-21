@@ -1,0 +1,99 @@
+* {
+    margin: -0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lexend";
+    background: hsl(210, 36%, 96%);
+}
+
+
+.sidebar-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 3rem;
+    background: transparent;
+    border-color: transparent;
+    color: hsl(30, 90%, 59%);
+    cursor: pointer;
+}
+
+.nav{
+    width: 370px;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background-color: #F9E8A4;
+    height: 100%;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-open {
+    left: 0;
+}
+
+.nav-closed{
+    left: -320px;
+}
+
+.nav-button{
+    z-index: 2;
+}
+
+.sidebar-toggle span {
+    font-size: 2.5rem;
+}
+
+.sidebar-toggle-hover{
+    color: hsl(47, 90%, 76%);
+}
+
+.user_list{
+    display: block;
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding: 10px;
+    background-color: #FBF3D4;
+    color: 000000;
+    transition: all 0.3s linear;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 15px 10px 10px 10px;
+
+}
+
+
+.user_list:hover {
+    background: hsl(38, 65%, 85%);
+    color: hsl(0, 0%, 17%);
+    padding-left: 15px;
+    box-shadow: 3px 3px hsl(0, 0%, 38%);
+}
+
+.generate {
+    background-color: #FFCC00;
+    color:black;
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10px 10px 10px 25px;
+    padding: 10px;
+    height: 35px;
+    width: 80%;
+    font-size: 12px;
+    align-content: center;
+    cursor: pointer;
+}
+
+.generate:hover {
+    background: hsl(29, 95%, 60%);
+    color: hsl(0, 0%, 17%);
+    box-shadow: 3px 3px hsl(0, 0%, 38%);
+}

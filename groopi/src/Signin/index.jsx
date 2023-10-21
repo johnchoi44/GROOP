@@ -1,12 +1,29 @@
-import {React, useState} from "react";
+import {React, useState, useNavigate} from "react";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
 import './style.css';
+import { auth } from "../firebase/firebase-config";
+import signOut from "firebase/auth"
 
 function Signin() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate()
+
+    const signin = () => signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUser(user)
+        navigate("/home")
+        console.log(user)
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+    });
     return (
         
         <div style = {{  fontFamily: 'Lexend',display: 'flex',alignItems:'center',justifyContent:'center',backgroundImage: `url(${backgroundphoto})`, backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '100vh',padding: '0',margin: '0'}}>
@@ -24,9 +41,10 @@ function Signin() {
                     </div>
                     <input style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
                     
-                    <div className="next" onclick = "openPage('Home.html')">
+                    <div className="next" onClick = {signin}>
                         Log in
-                </div>
+                    </div>
+
                 </div>
 
                 
