@@ -78,22 +78,86 @@ body {
 }
 
 .generate {
-    background-color: #FFCC00;
+    background-color: #FBF3D4;
     color:black;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
     margin: 10px 10px 10px 25px;
     padding: 10px;
-    height: 35px;
+    height: 60px;
     width: 80%;
     font-size: 12px;
     align-content: center;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 3px 3px hsl(0, 0%, 38%);
 }
 
 .generate:hover {
-    background: hsl(29, 95%, 60%);
+    background: #FBDC64;
     color: hsl(0, 0%, 17%);
-    box-shadow: 3px 3px hsl(0, 0%, 38%);
+    
+}
+.mainCon{
+
+    width: 70vw;
+    background-color: #F9E8A4;
+    border-style: solid;
+    border-color: #3B4E69;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.navBar{
+    width: 20vw;
+    background-color: #F9E8A4;
+    height: 80vh;
+    border-radius: 20px 0 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userColumn{
+    background-color: #FBF3D4;
+    height: 65px;
+    width: 250px;
+    border-radius: 20px;
+    
+}
+
+.descrip{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    height: 30px;
+}
+
+.descripp{
+    margin: 0;
+}
+
+.generatebut{
+
+    width: 65%;
+    border-radius: 40px;
+    background-color: #FFCC00;
+    height: 50px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.chatCon{
+    width: 80%;
+    border-radius: 0 20px 20px 0;
+    background-color: #FFFBEC;
 }
