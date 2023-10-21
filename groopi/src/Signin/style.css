@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+}
+.subCon {
+    width: 50vw;
+    height: 60vh;
+    background: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.subsubCon{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputTitle{
+    font-size: 15px;
+    font-weight:lighter;
+    align-self:flex-start;
+    margin-top: 10px;
+}
+
+input {
+    margin-top: 5px;
+    width: 300px;
+}
+
+.next{
+    width: 200px;
+    height: 50px;
+    background-color: #F9E7A0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 50px;
+    color: #3B4E69;
+    margin-top: 50px;
+    cursor: pointer;
+}
