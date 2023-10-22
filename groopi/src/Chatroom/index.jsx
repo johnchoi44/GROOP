@@ -93,6 +93,8 @@ function Chatroom() {
                 <div className="chatCon">
                     <div className="chatBubble">hello my name is john</div>
                 </div>
+
+                <button>Upload</button>
             </div>
             </div>
 

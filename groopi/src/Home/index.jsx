@@ -1,4 +1,5 @@
 import React, { useRef, useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import './home.css';
 
 import { motion } from "framer-motion";
@@ -9,17 +10,18 @@ import logout from '../images/logout.png';
 import gear from '../images/gear.png';
 import tinyprofile from '../images/tinyprofile.png'
 import Modal from '../Components/modal/Modal';
+import { signOut } from "firebase/auth";
 
+import { auth } from "../../firebase-config";
 
 function Home() {
     const [isOpen, setIsOpen] = useState(false);
     const [hover, setHover] = useState(true);
     const [select, setSelect] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
-
-
     const [isModalOpen, setModalOpen] = useState(false);
 
+    
     const openModal = () => {
     setModalOpen(true);
     };
@@ -32,7 +34,18 @@ function Home() {
           setMenuOpen(!isMenuOpen);
         
     };
-
+    
+      const navigate = useNavigate();
+    const signout = () => signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log("success")
+        navigate("/")
+          
+      }).catch((error) => {
+        // An error happened.
+        console.log(error)
+      });
+      
 
     return (
         
@@ -60,7 +73,10 @@ function Home() {
             <div className="menu-item">
               <div className="menu-item-content">
                 <img src={logout} alt="Log Out" />
-                <span>Log Out</span>
+                <span onClick={signout}>
+                  Log Out 
+                  
+                </span>
               </div>
             </div>
           </div>
@@ -103,6 +119,7 @@ function Home() {
 
 
             {isModalOpen && <Modal onClose={closeModal} />}
+            
         </div>
     );
 }

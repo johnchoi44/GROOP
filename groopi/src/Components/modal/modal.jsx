@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
 import './Modal.css'; // Create a separate CSS file for styling
 import exit from '../../images/exit.png';
+import { auth } from '../../../firebase-config';
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+
 const Modal = ({ onClose }) => {
+  const navigate = useNavigate()
   const [selectedMenuItem, setSelectedMenuItem] = useState('profile');
 
   const handleMenuItemClick = (item) => {
     setSelectedMenuItem(item);
-  };
+  }
+
+console.log(auth)
+const logout = () => signOut(auth).then(() => {
+  // Sign-out successful.
+  console.log("success")
+  navigate("/")
+    
+}).catch((error) => {
+  // An error happened.
+  console.log(error)
+});
+  
   return (
     <div className="modal">
       <img onClick={onClose} style = {{cursor: 'pointer',position: 'absolute',right:'463px',top: '235px'}}src={exit} alt="" />
@@ -34,12 +51,16 @@ const Modal = ({ onClose }) => {
 
           </div>
         : 
-        
-        
+        (selectedMenuItem === "logout" ?
+        <div>
+        <div> Are you sure you want to log out? </div>
+        <button onClick={logout}> Log out</button>
+        </div>
+        :
         'Settings coming soon'
         
         
-        }</div>
+        )}</div>
       </div>
     </div>
   );
