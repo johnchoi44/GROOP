@@ -105,12 +105,14 @@ function Home() {
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 2, duration: 1 }}>Safe, smart, and simple – start your journey to meaningful connections today!</motion.p>
                     </div>
-                    <motion.div 
+                    {/* {isQueue === false ?  :  */}
+                    {!isQueue && <motion.div onClick = {() => setQueue(!isQueue)}
                     initial ={{scale: 0}}
                     animate = {{scale: 1}}
                     transition = {{delay:2.5, duration: 1.5,type: "spring", stiffness: 200, damping: 10}}
                     whileHover={{ scale: 1.1 }}
-                    className="chatNow">Chat now!</motion.div>
+                    className="chatNow" >Chat now!</motion.div>}
+                    {isQueue && <span class="loader"></span>}
                 </div>
                 <div className="image">
                 <motion.img initial={{ opacity: 0 }}
