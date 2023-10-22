@@ -1,9 +1,13 @@
-import {React, useState} from "react";
+import {React, useEffect, useState} from "react";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
 import './signup2.css';
 import { useNavigate } from "react-router-dom";
 import question from '../images/question.png';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, database } from "../../firebase-config";
+import { ref, update } from "firebase/database";
+// import { database } from "../../firebase-config";
 
 function Signup2() {
     const [username, setUsername] = useState("");
@@ -13,9 +17,19 @@ function Signup2() {
     const [age, setAge] = useState("");
     const [hobbies, setHobbies] = useState("");
     const [isQuestionHovered, setIsQuestionHovered] = useState(false);
-
-
+    const [uid, setUid] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        onAuthStateChanged(auth, user => {
+            if (user){
+                setUid(user.uid);
+            } else {
+                navigate("/signin");
+            }
+        })
+    }, []);
+
 
     const mbtiOptions = [
         "INFJ", "INTJ", "INFP", "INTP",
@@ -29,7 +43,21 @@ function Signup2() {
         "Music", "Gardening", "Cooking", "Drawing",
         "Painting", "Photography", "Gaming", "Hiking",
         "Yoga", "Dancing", "Volunteering", "Coding"
-      ];
+    ];
+
+    const submitInfo = () => {
+        const updates = {};
+
+        updates[`/users/${uid}/mbti`] = mbti;
+        updates[`/users/${uid}/hobbies`] = hobbies;
+        updates[`/users/${uid}/age`] = age;
+        
+        update(ref(database), updates).then(() => {
+            navigate("/home");
+        }).catch(err => {
+            alert(err);
+        });
+    }
       
     return (
         
@@ -82,7 +110,7 @@ function Signup2() {
                         <option key={option} value={option}>{option}</option>
                     ))}
                 </select>
-                    <div className="next" onClick = {() => navigate("/")}>
+                    <div className="next" onClick = {submitInfo}>
                         Done
                     </div>
                 </div>

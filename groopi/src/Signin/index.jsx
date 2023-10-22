@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
 import './signin.css';
-import { auth } from "../firebase/firebase-config";
+import { auth } from "../../firebase-config";
 
 
 function Signin() {

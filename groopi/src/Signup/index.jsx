@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import logo from '../images/logo.png';
 import './signup.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase-config";
-import { database } from "../../firebase-config";
+import { auth } from "../../firebase-config";
+import { database, functions } from "../../firebase-config";
 import { ref, onValue } from "firebase/database";
+import { httpsCallable } from 'firebase/functions';
+
 
 function Signup() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,17 +25,23 @@ function Signup() {
     //     });
     // };
 
+    const addUserToDB = httpsCallable(functions, "addUserToDB");
+
+
     const signUp = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            navigate("/home");
+        .then((credential) => {
+            const user = credential.user;
+            const email = user.email;
+            const uid = user.uid;
+            addUserToDB({uid: uid, email: email, username: username}).then(result => {console.log(result);}).catch(err => {alert(err)});
+            navigate("/signup2");
         })
         .catch(err => {
             alert(err);
         });
     }
 
-    const navigate = useNavigate();
     return (
         
         <div className="signupPageContainer" style = {{marginRight: '30px',fontFamily: 'Lexend',display: 'flex',alignItems:'center',justifyContent:'center',padding: '0',margin: '0'}}>
