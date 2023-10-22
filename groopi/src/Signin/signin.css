@@ -32,6 +32,7 @@ body{
 input {
     margin-top: 5px;
     width: 300px;
+    padding: 5px;
 }
 
 .next{

@@ -151,7 +151,7 @@ function Home() {
             </div>
 
 
-            {isModalOpen && <Modal onClose={closeModal} />}
+            {isModalOpen && <Modal mbti={mbti} age={age} hobbies={hobbies} onClose={closeModal} />}
             
         </div>
     );

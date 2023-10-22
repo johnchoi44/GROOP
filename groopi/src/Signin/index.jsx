@@ -14,6 +14,9 @@ function Signin() {
     const [user, setUser] = useState();
     const navigate = useNavigate()
 
+    const register = () => {
+        navigate('/signup')
+    }
     const signin = () => signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         // Signed in 
@@ -25,6 +28,7 @@ function Signin() {
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(error);
         console.log(errorCode)
         console.log(errorMessage)
 
@@ -45,7 +49,7 @@ function Signin() {
                         password
                     </div>
                     <input value= {password} onChange = {(e) => setPassword(e.target.value)}style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
-                    
+                    <div onClick = {register} style = {{fontSize: '10px',cursor: 'pointer',alignSelf: 'flex-start'}}>Don't have an account? Register</div>
                     <div className="next" onClick = {signin}>
                         Log in
                     </div>
