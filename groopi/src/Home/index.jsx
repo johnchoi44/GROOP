@@ -10,9 +10,10 @@ import logout from '../images/logout.png';
 import gear from '../images/gear.png';
 import tinyprofile from '../images/tinyprofile.png'
 import Modal from '../Components/modal/Modal';
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
-import { auth } from "../../firebase-config";
+import { auth, database } from "../../firebase-config";
+import { child, get, ref } from "firebase/database";
 
 function Home() {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +21,37 @@ function Home() {
     const [select, setSelect] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
-   
+    const [mbti, setMbti] = useState("");
+    const [age, setAge] = useState("");
+    const [hobbies, setHobbies] = useState("");
     const [isQueue, setQueue] = useState(false);
 
+    useEffect(() => {
+      onAuthStateChanged(auth, user => {
+        if (user){
+          const uid = user.uid;
+          const userRef = ref(database, `/users/${uid}`)
+          get(userRef, "/").then(snapshot => {
+            if (snapshot.exists()){
+              const data = snapshot.val();
+              setMbti(data.mbti);
+
+              if (data.age == "under21"){
+                setAge("Under 21");
+              } else {
+                setAge("Over 21");
+              }
+              setHobbies(data.hobbies);
+            } else {
+              console.log("data not available");
+            }
+          }).catch(err => {
+            alert(err);
+          });
+
+        }
+      })
+    }, [])
     
     const openModal = () => {
     setModalOpen(true);
