@@ -91,7 +91,7 @@ function Chatroom() {
                     </div>
                 </div>
                 <div className="chatCon">
-                    {/* Need to add chat messages here */}
+                    <div className="chatBubble">hello my name is john</div>
                 </div>
             </div>
             </div>
