@@ -26,6 +26,7 @@ function Chatroom() {
     const [chatroomId, setChatroomId] = useState(null);
     const [uid, setUid] = useState("");
     const [icebreaker, setIcebreaker] = useState(null);
+    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const dummy = useRef();
     useEffect(() => {
@@ -70,6 +71,12 @@ function Chatroom() {
                 setIcebreaker(data);
 
             })
+
+            const chatroomUsersRef = ref(database, `chatrooms/${chatroomId}/users`);
+            onValue(chatroomUsersRef, snapshot => {
+                const data = snapshot.val();
+                setUsers(data);
+            });
 
             // get(messagesRef, "/").then(snapshot => {
             //     if (snapshot.exists()){
@@ -171,32 +178,40 @@ function Chatroom() {
                     )}
 
                     <img src={logo2} alt="" style = {{height: '50px',width: '150px', marginTop: '50px'}}/>
-                    <div className="generate" style = {{marginTop: '70px'}}>
+                    {/* <div className="generate" style = {{marginTop: '70px'}}>
                         <img style = {{height: '40px',width: '40px'}}src= {birdman} alt="" />
                         <div className="descrip">
                             <p className = 'descripp'>Birdman</p>
                             <p className = 'descripp' style = {{fontSize: '7px',fontWeight:'400'}}>What can I say? I love birds and I'm a man</p>
                         </div>
+                    </div> */}
+                    {/* {users && users.map((user, index) => {
+                        <div className="generate">
+                            <img style = {{height: '40px',width: '40px'}}src= {sharknado} alt="" />
+                        </div>
+                    })} */}
+                    <div className="generate">
+                        <img style = {{height: '40px',width: '40px'}}src= {birdman} alt="" />
+                        <div className="descrip">
+                            <p className = 'descripp'>{users.length !== 0 && users[0].username}</p>
+                        </div>
                     </div>
                     <div className="generate">
                         <img style = {{height: '40px',width: '40px'}}src= {sharknado} alt="" />
                         <div className="descrip">
-                            <p className = 'descripp'>sharknado</p>
-                            <p className = 'descripp' style = {{fontSize: '7px',fontWeight:'400'}}>tornados and sharks</p>
+                            <p className = 'descripp'>{users.length !== 0 && users[1].username}</p>
                         </div>
                     </div>
                     <div className="generate">
                         <img style = {{height: '40px',width: '40px'}}src= {chad} alt="" />
                         <div className="descrip">
-                            <p className = 'descripp'>lyftking</p>
-                            <p className = 'descripp' style = {{fontSize: '7px',fontWeight:'400'}}>biggest bro you’ll ever see</p>
+                            <p className = 'descripp'>{users.length !== 0 && users[2].username}</p>
                         </div>
                     </div>
                     <div className="generate">
                         <img style = {{height: '40px',width: '40px'}}src= {you} alt="" />
                         <div className="descrip">
-                            <p className = 'descripp'>you</p>
-                            <p className = 'descripp' style = {{fontSize: '7px',fontWeight:'400'}}>I need some friends</p>
+                            <p className = 'descripp'>{users.length !== 0 && users[3].username}</p>
                         </div>
                     </div>
                     <div className="generatebut" >
