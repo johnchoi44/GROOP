@@ -2,7 +2,7 @@ import {React, useState} from "react";
 import { useNavigate } from "react-router-dom";
 // import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
-import './style.css';
+import './signup.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase-config";
 import { database } from "../../firebase-config";

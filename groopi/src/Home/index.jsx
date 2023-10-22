@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext, useEffect } from "react";
-import './style.css';
+import './home.css';
 
 import { motion } from "framer-motion";
 import wordlogo from '../images/wordlogo.png';

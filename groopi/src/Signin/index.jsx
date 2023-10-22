@@ -2,7 +2,7 @@ import {React, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
-import './style.css';
+import './signin.css';
 import { auth } from "../firebase/firebase-config";
 
 

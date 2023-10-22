@@ -1,7 +1,7 @@
 import {React, useState} from "react";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
-import './style.css';
+import './signup2.css';
 import { useNavigate } from "react-router-dom";
 import question from '../images/question.png';
 

@@ -2,6 +2,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #F9E6A0;
 }
 
 body {
@@ -61,6 +62,8 @@ body {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    align-self:flex-start;
+    margin-left: 65px;
 }
 
 .chatNow:hover{
