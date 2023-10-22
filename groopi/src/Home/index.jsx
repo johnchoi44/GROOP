@@ -20,6 +20,7 @@ function Home() {
     const [select, setSelect] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [isQueue, setQueue] = useState(false);
 
     
     const openModal = () => {
