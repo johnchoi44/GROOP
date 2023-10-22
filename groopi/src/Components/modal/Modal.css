@@ -123,5 +123,18 @@
   margin-bottom: 10px;
   font-size: 17px;
 }
+  .logoutbut {
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 15px;
+    margin: 15px;
+    background-color:#F9E6A0;
+    font-size: 15px;
+    cursor: pointer;
+  }
 
+  .logoutbut:hover{
+    box-shadow: 2px 2px gray;
+  }
   
