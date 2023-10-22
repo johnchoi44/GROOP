@@ -42,8 +42,6 @@ const logout = () => signOut(auth).then(() => {
             <p style = {{marginRight: '220px'}}>Age</p>
             <div className="line"/>
             {/* Show Age */}
-            <p style = {{marginRight: '220px'}}>Major</p>
-            {/* Show Major */}
             <div className="line"/>
             <p style = {{marginRight: '220px'}}>Hobbies</p>
             <div className="line"/>
