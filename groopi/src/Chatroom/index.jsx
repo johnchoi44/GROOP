@@ -8,14 +8,22 @@ import chad from '../images/chad.png'
 import sharknado from '../images/sharknado.png'
 import you from '../images/you.png'
 import './style.css';
+import Leave from '../Leave/index'
 
 function Chatroom() {
-    const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [username,setUsername] = useState('john');
     const database = [{userId: 'john', photoId: 'chad', message: 'SUP'},{userId: 'mom', photoId: 'mom', message: 'hello mother'},{userId: 'dad', photoId: 'dad', message: 'hello father'},]
     const [messages, setMessages] = useState([
     
     ]);
+
+    const openSettings = () => {
+        setIsSettingsOpen(true)
+    }
+    const closeSettings = () => {
+        setIsSettingsOpen(false)
+    }
 
     const handleSendMessage = (message) => {
         // Create a new message object with the current user's ID and the input message
@@ -67,7 +75,8 @@ function Chatroom() {
 
             <div className="mainCon">
                 <div className="navBar">
-                    <img src= {settings} style = {{position: 'absolute', left: '240px',top: '97px',cursor: 'pointer'}}/>
+                    <img onClick = {openSettings} src= {settings} style = {{position: 'absolute', left: '240px',top: '97px',cursor: 'pointer'}}/>
+                    {isSettingsOpen && <Leave onClose = {closeSettings}/>}
                     <img src={logo2} alt="" style = {{height: '50px',width: '150px', marginTop: '50px'}}/>
                     <div className="generate" style = {{marginTop: '70px'}}>
                         <img style = {{height: '40px',width: '40px'}}src= {birdman} alt="" />
