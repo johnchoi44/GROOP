@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useRef, useEffect, useState} from "react"
 import logo2 from "../images/logo2.png"
 import birdman from '../images/birdman.png'
 import settings from "../images/Vector.png"
@@ -7,7 +7,7 @@ import Background from '../images/background.png'
 import chad from '../images/chad.png'
 import sharknado from '../images/sharknado.png'
 import you from '../images/you.png'
-import './style.css';
+import './chat.css';
 import Leave from '../Leave/index'
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, database } from "../../firebase-config";
@@ -26,7 +26,7 @@ function Chatroom() {
     const [chatroomId, setChatroomId] = useState(null);
     const [uid, setUid] = useState("");
     const navigate = useNavigate();
-
+    const dummy = useRef();
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user){
@@ -95,6 +95,7 @@ function Chatroom() {
         }).catch(err => {alert(err)});
 
         setCurrentMessage("");
+        dummy.current.scrollIntoView({behavior: 'smooth'});
     };
     
     return (
@@ -193,12 +194,18 @@ function Chatroom() {
                         <img src={chad} style = {{height: '35px',width: '35px'}}alt="" />
                         <div className="chatBubble">hello my name is johndddddddkj;alkdfj; dfasdfakdjsf;lkajd;flkjasd;lkfja;lkdfj;laksdjf;lkasdjf;lkajsfd;lkjalksdjf;alkj</div>
                     </div> */}
+                    <div className="chatSubCon">
                     {messages.map((message, index) => (
                     <div className={` ${message.uid === uid ? 'chatTotal2' : 'chatTotal'}`} key={index}>
-                        <img src={chad} className="chad" alt="" />
+                        {message.uid != uid && <img src={chad} className="chad" alt="" />}
                         <div className="chatBubble">{message.message}</div>
+                        
                     </div>
-                ))}
+                    
+                    ))}
+               <div style = {{marginTop: '80px'}}ref = {dummy}></div>
+                </div>
+                
                     <div className="inputContainer">
                         <input onChange={(e) => setCurrentMessage(e.target.value)} value={currentMessage} style = {{backgroundColor: '#FFFAE9',padding: '5px',borderRadius: '20px',height: '30px',width: '500px'}}type="text" placeholder="Type your message..." />
                         <div className = 'sendButton' onClick={() => handleSendMessage(currentMessage)}>Send</div>

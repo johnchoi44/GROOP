@@ -170,14 +170,12 @@ body {
     display: flex;
     align-items: center;
     margin-left: 40px;
-    background-color: lightyellow;
     margin-top: 30px;
 }
 .chatTotal2{
     display: flex;
     align-items: center;
     margin-left: 40px;
-    background-color: lightyellow;
     margin-top: 30px;
     justify-content: flex-end;
     margin-right: 40px;
@@ -191,6 +189,7 @@ body {
     padding: 15px;
     line-height: 1.5;
     max-width: 300px;
+    font-size: 13px;
     margin-left: 10px; /* Add margin to separate the image and chatBubble if needed */
     word-wrap: break-word; /* Allow long words to break and wrap onto the next line */
 }
@@ -239,4 +238,9 @@ body {
 }
 .leaveButton{
     font-weight: bold;
+}
+.chatSubCon{
+    max-height: 73vh;
+    overflow-y:scroll;
+
 }

@@ -21,6 +21,8 @@ function Home() {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
    
+    const [isQueue, setQueue] = useState(false);
+
     
     const openModal = () => {
     setModalOpen(true);
