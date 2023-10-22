@@ -219,3 +219,21 @@ body {
     margin-left: 10px;
     cursor: pointer;
 }
+
+.chatSettings{
+    position: absolute;
+    left: 200px;
+    top: 118px;
+    width: 100px;
+    height: 40px;
+    background-color: #FF8181;
+    cursor: pointer;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+.leaveButton{
+    
+}
