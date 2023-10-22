@@ -10,7 +10,18 @@ import you from '../images/you.png'
 import './style.css';
 
 function Chatroom() {
-    const [isNavOpen, setIsNavOpen] = useState(false)
+    const [isNavOpen, setIsNavOpen] = useState(false);
+    const [username,setUsername] = useState('john');
+    const database = [{userId: 'john', photoId: 'chad', message: 'SUP'},{userId: 'mom', photoId: 'mom', message: 'hello mother'},{userId: 'dad', photoId: 'dad', message: 'hello father'},]
+    const [messages, setMessages] = useState([
+    
+    ]);
+
+    const handleSendMessage = (message) => {
+        // Create a new message object with the current user's ID and the input message
+        const newMessage = { userId: 'john', photoId: 'chad', message: message };
+        setMessages([...messages, newMessage]);
+    };
 
     return (
         <>  
@@ -91,7 +102,20 @@ function Chatroom() {
                     </div>
                 </div>
                 <div className="chatCon">
-                    <div className="chatBubble">hello my name is john</div>
+                    <div className="chatTotal">
+                        <img src={chad} style = {{height: '35px',width: '35px'}}alt="" />
+                        <div className="chatBubble">hello my name is johndddddddkj;alkdfj; dfasdfakdjsf;lkajd;flkjasd;lkfja;lkdfj;laksdjf;lkasdjf;lkajsfd;lkjalksdjf;alkj</div>
+                    </div>
+                    {messages.map((message, index) => (
+                    <div className={`chatTotal ${message.userId === 'john' ? 'sent' : 'received'}`} key={index}>
+                        <img src={chad} className="chad" alt="" />
+                        <div className="chatBubble">{message.message}</div>
+                    </div>
+                ))}
+                    <div className="inputContainer">
+                        <input style = {{backgroundColor: '#FFFAE9',padding: '5px',borderRadius: '20px',height: '30px',width: '500px'}}type="text" placeholder="Type your message..." />
+                        <div className = 'sendButton'onClick={handleSendMessage}>Send</div>
+                    </div>
                 </div>
             </div>
             </div>
