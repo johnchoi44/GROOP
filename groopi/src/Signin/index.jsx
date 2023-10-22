@@ -44,7 +44,7 @@ function Signin() {
                     <div className="inputTitle">
                         password
                     </div>
-                    <input value = {password} onChange = {(e) => setPassword(e.target.value)}style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
+                    <input value= {password} onChange = {(e) => setPassword(e.target.value)}style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
                     
                     <div className="next" onClick = {signin}>
                         Log in
