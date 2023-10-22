@@ -184,7 +184,7 @@ function Chatroom() {
                             <p className = 'descripp' style = {{fontSize: '7px',fontWeight:'400'}}>I need some friends</p>
                         </div>
                     </div>
-                    <div className="generatebut">
+                    <div className="generatebut" >
                         Generate Prompt!
                     </div>
                 </div>

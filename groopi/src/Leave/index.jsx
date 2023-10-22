@@ -5,7 +5,7 @@ import { database } from '../../firebase-config';
 import {ref, set, child, get} from "firebase/database";
 
 function Leave(props) {
-    console.log(props.onClose)
+    
     const [feedback, setFeedback] = useState("");
     const navigate = useNavigate();
     
@@ -20,7 +20,7 @@ function Leave(props) {
                 feedback: feedback,
                 mbti: snapshot.val()
               })
-              navigate('/home')
+             
             }
             else {
               console.log("No data available");
@@ -28,7 +28,8 @@ function Leave(props) {
             console.error(error);
           });
           
-
+          
+          navigate('/home')
         
     }
     return (
@@ -38,7 +39,7 @@ function Leave(props) {
             <input className= "feedback" value = {feedback} onChange = {(e) => {setFeedback(e.target.value)}} ></input>
             <div className='buttons'>
                 <button className='submit' onClick={() => writeFeedbackData(props.uid, props.chatroomId, feedback)}>Submit</button>
-                <button  className = 'back' onClick = {() => props.onClose}> Back</button>
+                <button  className = 'back' onClick = {props.onClose}> Back</button>
             </div>
             </div>
         </div>

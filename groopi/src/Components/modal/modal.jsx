@@ -45,6 +45,7 @@ const logout = () => signOut(auth).then(() => {
             
             <p style = {{marginRight: '220px'}}>Age</p>
             <div className="line"/>
+
             <div className="attributes2">
               {age}
             </div>
@@ -59,7 +60,7 @@ const logout = () => signOut(auth).then(() => {
         (selectedMenuItem === "logout" ?
         <div>
         <div> Are you sure you want to log out? </div>
-        <button onClick={logout}> Log out</button>
+        <button className="logoutbut" onClick={logout}> Log out</button>
         </div>
         :
         'Settings coming soon'
