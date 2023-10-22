@@ -13,7 +13,7 @@ import Modal from '../Components/modal/Modal';
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
 import { auth, database } from "../../firebase-config";
-import { child, get, ref } from "firebase/database";
+import { child, get, ref, onValue, set } from "firebase/database";
 
 function Home() {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,13 +23,16 @@ function Home() {
     const [isModalOpen, setModalOpen] = useState(false);
     const [mbti, setMbti] = useState("");
     const [age, setAge] = useState("");
+    const [uid, setUid] = useState("");
     const [hobbies, setHobbies] = useState("");
     const [isQueue, setQueue] = useState(false);
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
       onAuthStateChanged(auth, user => {
         if (user){
           const uid = user.uid;
+          setUid(uid);
           const userRef = ref(database, `/users/${uid}`)
           get(userRef, "/").then(snapshot => {
             if (snapshot.exists()){
@@ -42,6 +45,8 @@ function Home() {
                 setAge("Over 21");
               }
               setHobbies(data.hobbies);
+
+              setUsername(data.username);
             } else {
               console.log("data not available");
             }
@@ -51,7 +56,39 @@ function Home() {
 
         }
       })
-    }, [])
+    }, []);
+
+    useEffect(() => {
+      if (isQueue){
+        const chatroomRef = ref(database, `users/${uid}/chatroom/`);
+        onValue(chatroomRef, snapshot => {
+          const data = snapshot.val();
+          console.log("chatroom listener");
+          console.log(data);
+          if (data !== null){
+            if (data > 0){
+              navigate("/chatroom");
+            }
+            
+          }
+        });
+      }
+    }, [isQueue]);
+
+    const addToQ = () => {
+      setQueue(!isQueue);
+      const dbRef = ref(database, `queue/users/${uid}`);
+      const updates = {};
+      
+      const data = {
+        username: username,
+        mbti: mbti
+      }
+
+      set(dbRef, data).then(() => {
+        console.log("added to queue");
+      }).catch(err => {alert(err)});
+    }
     
     const openModal = () => {
     setModalOpen(true);
@@ -135,7 +172,7 @@ function Home() {
                                 transition={{ delay: 2, duration: 1 }}>Safe, smart, and simple – start your journey to meaningful connections today!</motion.p>
                     </div>
                     {/* {isQueue === false ?  :  */}
-                    {!isQueue && <motion.div onClick = {() => setQueue(!isQueue)}
+                    {!isQueue && <motion.div onClick = {addToQ}
                     initial ={{scale: 0}}
                     animate = {{scale: 1}}
                     transition = {{delay:2.5, duration: 1.5,type: "spring", stiffness: 200, damping: 10}}

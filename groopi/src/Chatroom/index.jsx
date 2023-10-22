@@ -25,6 +25,7 @@ function Chatroom() {
     const [currentMessage, setCurrentMessage] = useState("");
     const [chatroomId, setChatroomId] = useState(null);
     const [uid, setUid] = useState("");
+    const [icebreaker, setIcebreaker] = useState(null);
     const navigate = useNavigate();
     const dummy = useRef();
     useEffect(() => {
@@ -57,9 +58,18 @@ function Chatroom() {
             const messagesRef = ref(database, `chatrooms/${chatroomId}/messages`);
             onValue(messagesRef, snapshot => {
                 const data = snapshot.val();
+                console.log("messages data");
                 console.log(data);
                 setMessages(data);
             });
+
+            const icebreakerRef = ref(database, `chatrooms/${chatroomId}/icebreaker`);
+            onValue(icebreakerRef, snapshot => {
+                const data = snapshot.val();
+                console.log("icebreaker data");
+                setIcebreaker(data);
+
+            })
 
             // get(messagesRef, "/").then(snapshot => {
             //     if (snapshot.exists()){
@@ -87,9 +97,14 @@ function Chatroom() {
 
     const handleSendMessage = (message) => {
         // Create a new message object with the current user's ID and the input message
-        var highestMsgId = messages.length + 1;
+        var highestMsgId;
+        if (messages){
+            highestMsgId = messages.length + 1;
+        } else {
+            highestMsgId = 1;
+        }
         
-        set(ref(database, `chatrooms/${chatroomId}/messages/${messages.length + 1}`), {
+        set(ref(database, `chatrooms/${chatroomId}/messages/${highestMsgId}`), {
             uid: uid,
             message: message
         }).catch(err => {alert(err)});
@@ -195,7 +210,15 @@ function Chatroom() {
                         <div className="chatBubble">hello my name is johndddddddkj;alkdfj; dfasdfakdjsf;lkajd;flkjasd;lkfja;lkdfj;laksdjf;lkasdjf;lkajsfd;lkjalksdjf;alkj</div>
                     </div> */}
                     <div className="chatSubCon">
-                    {messages.map((message, index) => (
+                    {icebreaker !== null && 
+                        <div className="chatTotal">
+                            <img src={chad} className="chad" alt="" />
+                            <div className="chatBubble">{<span style={{fontWeight: "bold"}}>{"(System) ICEBREAKER: " + icebreaker.message}</span>}</div>
+                        
+                        </div>
+
+                    }
+                    {messages !== null && messages.map((message, index) => (
                     <div className={` ${message.uid === uid ? 'chatTotal2' : 'chatTotal'}`} key={index}>
                         {message.uid != uid && <img src={chad} className="chad" alt="" />}
                         <div className="chatBubble">{message.message}</div>
