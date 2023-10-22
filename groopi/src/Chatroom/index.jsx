@@ -11,6 +11,7 @@ import './style.css';
 
 function Chatroom() {
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isQuestionHovered, setIsQuestionHovered] = useState(false);
     const [username,setUsername] = useState('john');
     const database = [{userId: 'john', photoId: 'chad', message: 'SUP'},{userId: 'mom', photoId: 'mom', message: 'hello mother'},{userId: 'dad', photoId: 'dad', message: 'hello father'},]
     const [messages, setMessages] = useState([
@@ -22,7 +23,7 @@ function Chatroom() {
         const newMessage = { userId: 'john', photoId: 'chad', message: message };
         setMessages([...messages, newMessage]);
     };
-
+    
     return (
         <>  
         <div style = {{  fontFamily: 'Lexend',display: 'flex',alignItems:'center',justifyContent:'center',backgroundImage: `url(${Background})`, backgroundSize: 'cover',backgroundRepeat: 'no-repeat', height: '100vh',padding: '0',margin: '0'}}>
@@ -67,7 +68,15 @@ function Chatroom() {
 
             <div className="mainCon">
                 <div className="navBar">
-                    <img src= {settings} style = {{position: 'absolute', left: '240px',top: '97px',cursor: 'pointer'}}/>
+                    <img src= {settings} style = {{position: 'absolute', left: '240px',top: '97px',cursor: 'pointer' }}onMouseEnter={() => setIsQuestionHovered(true)}
+                            onMouseLeave={() => setIsQuestionHovered(false)} />
+                {isQuestionHovered && (
+    <div onMouseEnter={() => setIsQuestionHovered(true)}
+    onMouseLeave={() => setIsQuestionHovered(false)}className="chatSettings">
+      <div className="leaveButton">Leave</div>
+    </div>
+  )}
+
                     <img src={logo2} alt="" style = {{height: '50px',width: '150px', marginTop: '50px'}}/>
                     <div className="generate" style = {{marginTop: '70px'}}>
                         <img style = {{height: '40px',width: '40px'}}src= {birdman} alt="" />
