@@ -107,6 +107,7 @@
   font-size: 15px;
 
 
+
 }
 .attributes3{
   background-color: #AEC6CF;
@@ -123,6 +124,7 @@
   margin-bottom: 10px;
   font-size: 17px;
 }
+
   .logoutbut {
     width: 80px;
     height: 40px;
@@ -133,6 +135,7 @@
     font-size: 15px;
     cursor: pointer;
   }
+
 
   .logoutbut:hover{
     box-shadow: 2px 2px gray;
