@@ -78,6 +78,52 @@
   
   
   /* ... other styles for the modal content ... */
+.attributes{
+  background-color: #dea5a4;
+  height: 30px;
+  width: 80px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+
+}
+.attributes2{
+  text-align: center;
+  background-color: #77DD77;
+  height: 30px;
+  width: 100px;
+  border-radius: 20px;
+  font-weight: 400;
+  margin-top: 10px;
+  display: inline-block;
+  padding: 5px;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  font-size: 15px;
+
+
+
+}
+.attributes3{
+  background-color: #AEC6CF;
+  height: 30px;
+  border-radius: 20px;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  margin-top: 10px;
+  padding: 10px;
+  line-height: center;
+  line-height: 0.5;
+  margin-bottom: 10px;
+  font-size: 17px;
+}
 
   .logoutbut {
     width: 80px;
@@ -89,6 +135,7 @@
     font-size: 15px;
     cursor: pointer;
   }
+
 
   .logoutbut:hover{
     box-shadow: 2px 2px gray;

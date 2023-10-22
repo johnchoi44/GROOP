@@ -5,7 +5,8 @@ import { auth } from '../../../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
-const Modal = ({ onClose }) => {
+const Modal = ({ onClose, mbti, age, hobbies }) => {
+
   const navigate = useNavigate()
   const [selectedMenuItem, setSelectedMenuItem] = useState('profile');
 
@@ -38,13 +39,21 @@ const logout = () => signOut(auth).then(() => {
           <div style = {{textAlign: 'left'}}>
             <p style = {{marginRight: '220px'}}>MBTI</p>
             <div className="line"/>
-            {/* Show MBTI */}
+            <div className="attributes">
+              {mbti}
+            </div>
+            
             <p style = {{marginRight: '220px'}}>Age</p>
             <div className="line"/>
-            {/* Show Age */}
+
+            <div className="attributes2">
+              {age}
+            </div>
             <p style = {{marginRight: '220px'}}>Hobbies</p>
             <div className="line"/>
-            {/* Show Hobby */}
+            <div className="attributes3">
+              {hobbies}
+            </div>
 
           </div>
         : 
