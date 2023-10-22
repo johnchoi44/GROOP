@@ -5,7 +5,7 @@ import logo from '../images/logo.png';
 import './signup.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
-import { database } from "../../firebase-config";
+import { database, functions } from "../../firebase-config";
 import { ref, onValue } from "firebase/database";
 import { httpsCallable } from 'firebase/functions';
 

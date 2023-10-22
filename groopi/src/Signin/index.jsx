@@ -4,10 +4,7 @@ import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
 import './signin.css';
 import { auth } from "../../firebase-config";
-<<<<<<< HEAD
-=======
 import { signInWithEmailAndPassword } from "firebase/auth";
->>>>>>> 377aadee2378e928fb30169961b24426a85368dc
 
 
 function Signin() {
