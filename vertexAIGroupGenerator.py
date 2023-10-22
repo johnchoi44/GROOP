@@ -19,13 +19,13 @@ model = TextGenerationModel.from_pretrained("text-bison")
 
 # Format the users' data into the desired input string for Vertex AI
 user_data = "\n".join([f'Username: "{user["username"]}" mbti: "{user["mbti"]}"' for user in users])
-input_text = f"""Could you create groups of 4 for me out of these 20 people based on their compatibility according to this matrix for MBTI scores where the higher the score means the more compatible:
+input_text = f"""Could you create groups of 4 for me out of these people based on their compatibility according to this matrix for MBTI scores where the higher the score means the more compatible:
 
 {user_data}
 
 Group them EXACTLY like this (First four are the first group and so on):
 
-"Username1","Username2","Username3","Username4"
+"FirstUsername","SecondUsername","ThirdUsername","FourthUsername"
 
 This will go on until we have all 20 grouped together in a big list, but they need to be in chunks of 4 by group."""
 

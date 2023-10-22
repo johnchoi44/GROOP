@@ -3,7 +3,7 @@ const { saveWeightsToFirebase, loadWeightsFromFirebase } = require('./firebase')
 
 const admin = require('firebase-admin');
 
-let serviceAccount = require("/Users/John/Desktop/GROOP.v0/groopv0-efec2-firebase-adminsdk-eggmr-b0af3c0a01.json");
+let serviceAccount = require("/Users/John/Desktop/GROOP/GROOP/groopv0-efec2-firebase-adminsdk-eggmr-b0af3c0a01.json");
 
 // admin.initializeApp({
 //     credential: admin.credential.cert(serviceAccount),
@@ -367,5 +367,6 @@ async function evaluateAndModifyWeights(code1, code2) {
     saveWeightsToFirebase(MBTI_weights);
     // process.exit()
 }
+
 
 evaluateAndModifyWeights("ENFJ", "ENFP")

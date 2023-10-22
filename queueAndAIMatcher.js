@@ -1,13 +1,14 @@
 const admin = require('firebase-admin');
 const { exec } = require('child_process');
+const { sendIcebreakerToChatroom } = require('./sendicebreaker')
 
 // Initialize Firebase
 const serviceAccount = require("./groopv0-efec2-firebase-adminsdk-eggmr-b0af3c0a01.json");
 const { stdout } = require('process');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://groopv0-efec2-default-rtdb.firebaseio.com/'
-});
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+//     databaseURL: 'https://groopv0-efec2-default-rtdb.firebaseio.com/'
+// });
 
 const db = admin.database();
 const queueRef = db.ref('/queue/users');
@@ -94,6 +95,7 @@ function createChatroomAndAssignID(fullUserData) {
                 users: fullUserData,
                 created: admin.database.ServerValue.TIMESTAMP
             });
+            sendIcebreakerToChatroom(newChatroomID)
             // Assign the chatroom ID to all users
             fullUserData.forEach(userData => {
                 const userRef = db.ref(`/users/${userData.uid}`);
@@ -101,6 +103,7 @@ function createChatroomAndAssignID(fullUserData) {
             });
         }
     });
+
 }
 
 // function fetchUserDataAndCreateChatroom(usernames) {
@@ -172,7 +175,7 @@ function checkQueueAndProcess() {
                     createChatroomsFromOutput(stdout)
                     // Once done, remove only the processed users from the queue
                     selectedUsersKeys.forEach(key => {
-                        // queueRef.child(key).remove();
+                        queueRef.child(key).remove();
                         const a = 0
                     });
                 });
@@ -182,6 +185,6 @@ function checkQueueAndProcess() {
     // process.exit()
 }
 
-checkQueueAndProcess()
+setInterval(checkQueueAndProcess, 5000)
 
 // setInterval(checkQueueAndProcess, 5000);  // Check every 1 seconds
