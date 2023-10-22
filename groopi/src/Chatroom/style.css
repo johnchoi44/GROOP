@@ -160,8 +160,10 @@ body {
 
 .chatCon{
     width: 80%;
+    max-height: 80vh;
     border-radius: 0 20px 20px 0;
     background-color: #FFFBEC;
+    overflow-y: scroll;
 }
 
 .chatTotal {
@@ -204,6 +206,7 @@ body {
     right: 260px;
     display: flex;
     align-items: center;
+    /* width: 100%; */
 }
 
 .sendButton{

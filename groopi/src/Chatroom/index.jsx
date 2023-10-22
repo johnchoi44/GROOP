@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import logo2 from "../images/logo2.png"
 import birdman from '../images/birdman.png'
 import settings from "../images/Vector.png"
@@ -8,20 +8,82 @@ import chad from '../images/chad.png'
 import sharknado from '../images/sharknado.png'
 import you from '../images/you.png'
 import './style.css';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, database } from "../../firebase-config";
+import { child, get, onValue, ref, set } from "firebase/database";
+import { useNavigate } from "react-router-dom";
+
 
 function Chatroom() {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isQuestionHovered, setIsQuestionHovered] = useState(false);
     const [username,setUsername] = useState('john');
-    const database = [{userId: 'john', photoId: 'chad', message: 'SUP'},{userId: 'mom', photoId: 'mom', message: 'hello mother'},{userId: 'dad', photoId: 'dad', message: 'hello father'},]
-    const [messages, setMessages] = useState([
-    
-    ]);
+    // const database = [{userId: 'john', photoId: 'chad', message: 'SUP'},{userId: 'mom', photoId: 'mom', message: 'hello mother'},{userId: 'dad', photoId: 'dad', message: 'hello father'},]
+    const [messages, setMessages] = useState([]);
+    const [currentMessage, setCurrentMessage] = useState("");
+    const [chatroomId, setChatroomId] = useState(null);
+    const [uid, setUid] = useState("");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        onAuthStateChanged(auth, user => {
+            if (user){
+                const uid = user.uid;
+                setUid(uid);
+                console.log(uid);
+                const usernameRef = ref(database, `users/${uid}/`);
+                get(usernameRef, "/").then(snapshot => {
+                    if (snapshot.exists()){
+                        const data = snapshot.val();
+                        console.log(data);
+                        setUsername(data.username);
+                        setChatroomId(data.chatroom);
+                    } else {
+                        console.log("no data available");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });    
+
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        if (chatroomId){
+
+            const messagesRef = ref(database, `chatrooms/${chatroomId}/messages`);
+            onValue(messagesRef, snapshot => {
+                const data = snapshot.val();
+                console.log(data);
+                setMessages(data);
+            });
+
+            // get(messagesRef, "/").then(snapshot => {
+            //     if (snapshot.exists()){
+            //         const data = snapshot.val();
+            //         setMessages(data);
+            //         console.log(data);
+            //     } else {
+            //         console.log("no data available");
+            //     }
+            // }).catch(err => {
+            //     alert(err);
+            // });
+        };
+        
+    }, [chatroomId])
 
     const handleSendMessage = (message) => {
         // Create a new message object with the current user's ID and the input message
-        const newMessage = { userId: 'john', photoId: 'chad', message: message };
-        setMessages([...messages, newMessage]);
+        var highestMsgId = messages.length + 1;
+        
+        set(ref(database, `chatrooms/${chatroomId}/messages/${messages.length + 1}`), {
+            uid: uid,
+            message: message
+        }).catch(err => {alert(err)});
+
+        setCurrentMessage("");
     };
     
     return (
@@ -111,23 +173,22 @@ function Chatroom() {
                     </div>
                 </div>
                 <div className="chatCon">
-                    <div className="chatTotal">
+                    {/* <div className="chatTotal">
                         <img src={chad} style = {{height: '35px',width: '35px'}}alt="" />
                         <div className="chatBubble">hello my name is johndddddddkj;alkdfj; dfasdfakdjsf;lkajd;flkjasd;lkfja;lkdfj;laksdjf;lkasdjf;lkajsfd;lkjalksdjf;alkj</div>
-                    </div>
+                    </div> */}
                     {messages.map((message, index) => (
-                    <div className={`chatTotal ${message.userId === 'john' ? 'sent' : 'received'}`} key={index}>
+                    <div className={` ${message.uid === uid ? 'chatTotal2' : 'chatTotal'}`} key={index}>
                         <img src={chad} className="chad" alt="" />
                         <div className="chatBubble">{message.message}</div>
                     </div>
                 ))}
                     <div className="inputContainer">
-                        <input style = {{backgroundColor: '#FFFAE9',padding: '5px',borderRadius: '20px',height: '30px',width: '500px'}}type="text" placeholder="Type your message..." />
-                        <div className = 'sendButton'onClick={handleSendMessage}>Send</div>
+                        <input onChange={(e) => setCurrentMessage(e.target.value)} value={currentMessage} style = {{backgroundColor: '#FFFAE9',padding: '5px',borderRadius: '20px',height: '30px',width: '500px'}}type="text" placeholder="Type your message..." />
+                        <div className = 'sendButton' onClick={() => handleSendMessage(currentMessage)}>Send</div>
                     </div>
                 </div>
 
-                <button>Upload</button>
             </div>
             </div>
 
