@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import logo from '../images/logo.png';
 import './signup.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase-config";
+import { auth } from "../../firebase-config";
 import { database } from "../../firebase-config";
 import { ref, onValue } from "firebase/database";
 

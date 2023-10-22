@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import backgroundphoto from "../images/background.png";
 import logo from '../images/logo.png';
 import './signin.css';
-import { auth } from "../firebase/firebase-config";
+import { auth } from "../../firebase-config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 function Signin() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [user, setUser] = useState();
     const navigate = useNavigate()
 
     const signin = () => signInWithEmailAndPassword(auth, email, password)
@@ -23,6 +25,7 @@ function Signin() {
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage)
 
     });
     return (
@@ -36,11 +39,11 @@ function Signin() {
                     <div className="inputTitle">
                         email
                     </div>
-                    <input style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
+                    <input value = {email} onChange = {(e) => setEmail(e.target.value)}style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
                     <div className="inputTitle">
                         password
                     </div>
-                    <input style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
+                    <input value = {password} onChange = {(e) => setPassword(e.target.value)}style = {{alignSelf: 'flex-start',borderRadius:'5px', border: '1px solid'}}></input>
                     
                     <div className="next" onClick = {signin}>
                         Log in
