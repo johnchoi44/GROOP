@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "@google-cloud/aiplatform": "^3.3.0"
-  }
-}
